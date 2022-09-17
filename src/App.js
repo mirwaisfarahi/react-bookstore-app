@@ -10,6 +10,7 @@ import Catagories from './components/Categories';
 import Navigation from './components/Navigation';
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -21,6 +22,7 @@ function App() {
       </Router>
     </div>
   );
+  
 }
 
 export default App;
