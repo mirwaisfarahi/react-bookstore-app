@@ -1,0 +1,10 @@
+.nav-bar {
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  gap: 2%;
+}
+
+.nav-bar a {
+  margin-right: 16px;
+}
