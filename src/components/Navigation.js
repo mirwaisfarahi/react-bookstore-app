@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Navigation() {
+
   return (
     <div className="nav-bar">
       <h1>Book Store</h1>
@@ -11,6 +12,7 @@ function Navigation() {
       </div>
     </div>
   );
+  
 }
 
 export default Navigation;
