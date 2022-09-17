@@ -7,7 +7,6 @@ function BookCard(props) {
   return (
     <div>
       <li>
-
         {title}
         :
         {author}
