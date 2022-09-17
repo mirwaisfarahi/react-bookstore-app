@@ -3,7 +3,6 @@ import AddBook from './AddBook';
 import BookCard from './BookCard';
 
 function BooksList() {
-  
   const retrieveBook = <BookCard title="Java Programming" author="Andrew High" />;
 
   return (
