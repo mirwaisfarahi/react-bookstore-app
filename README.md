@@ -7,6 +7,8 @@
 ## Built With
 
 - React Library
+- React-Reducer
+- ducks pattern
 - Gitflow
 - Linters (Lighthouse, Stylelint, Eslint)
 - Visual Studio Code
