@@ -8,7 +8,7 @@
 
 - React Library
 - React-Reducer
-- ducks pattern
+- Ducks Pattern and File Structure
 - Gitflow
 - Linters (Lighthouse, Stylelint, Eslint)
 - Visual Studio Code
