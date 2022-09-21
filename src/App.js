@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,8 +11,11 @@ import Catagories from './components/Categories';
 import Navigation from './components/Navigation';
 
 function App() {
+  const counter = useSelector((state) => state.counter);
+
   return (
     <div className="App">
+      <h1>{counter}</h1>
       <Router>
         <Navigation />
         <Routes>
