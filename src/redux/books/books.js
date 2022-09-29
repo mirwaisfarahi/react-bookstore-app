@@ -2,7 +2,19 @@ const ADD_BOOK = 'books/books/ADD';
 const REMOVE_BOOK = 'books/books/REMOVE';
 
 const initialState = {
-  bookList: [],
+  bookList: [
+    {
+      id: 1,
+      title: 'Java Programming',
+      author: 'Franklin'
+    },
+
+    {
+      id: 2,
+      title: 'Java Programming',
+      author: 'Franklin'
+    }
+  ],
 };
 
 export const addBook = (book) => ({
