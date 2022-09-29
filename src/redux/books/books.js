@@ -1,45 +1,42 @@
-const ADD_BOOK = 'books/books/ADD';
-const REMOVE_BOOK = 'books/books/REMOVE';
+// Actions
+const ADD_BOOK = 'bookstore/books/ADD_BOOK';
+const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
 
-const initialState = {
-  bookList: [
-    {
-      id: 1,
-      title: 'Java Programming',
-      author: 'Franklin'
-    },
+const books = [
+  {
+    id: 1,
+    title: 'Java Programming',
+    author: 'Ahmed',
+  },
+  {
+    id: 2,
+    title: 'Atomic Habits',
+    author: 'James',
+  },
+];
 
-    {
-      id: 2,
-      title: 'Java Programming',
-      author: 'Franklin'
-    }
-  ],
-};
-
-export const addBook = (book) => ({
-  type: ADD_BOOK,
-  payload: book,
-});
-
-export const removeBook = (book) => ({
-  type: REMOVE_BOOK,
-  payload: book,
-});
-
-const booksReducer = (state = initialState, action) => {
+const booksReducer = (state = books, action) => {
   switch (action.type) {
     case ADD_BOOK:
-      return {
-        bookList: [...state.bookList, action.payload]
-      };
+      return [
+        ...state,
+        action.payload,
+      ];
     case REMOVE_BOOK:
-      return {
-        bookList: state.bookList.filter((book) => book.id !== action.payload),
-      };
+      return state.filter((book) => book.id !== action.id);
     default:
       return state;
   }
 };
+
+export const addBook = (payload) => ({
+  type: ADD_BOOK,
+  payload,
+});
+
+export const removeBook = (id) => ({
+  type: REMOVE_BOOK,
+  id,
+});
 
 export default booksReducer;
