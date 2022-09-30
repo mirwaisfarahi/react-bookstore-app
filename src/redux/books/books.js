@@ -1,42 +1,81 @@
-// Actions
-const ADD_BOOK = 'bookstore/books/ADD_BOOK';
-const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const books = [
-  {
-    id: 1,
-    title: 'Java Programming',
-    author: 'Ahmed',
-  },
-  {
-    id: 2,
-    title: 'Atomic Habits',
-    author: 'James',
-  },
-];
+const ADD = 'books/books/ADD';
+const REMOVE = 'books/books/REMOVE';
+const SHOW_BOOK = 'books/books/SOW_BOOK';
 
-const booksReducer = (state = books, action) => {
+const url = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/baNJ1Mz064XyqrmXZeu8/books/';
+const initialState = {
+  bookArray: [],
+  msg: {},
+};
+
+export const showBook = createAsyncThunk(
+  SHOW_BOOK,
+  async (args, { dispatch }) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    const books = Object.keys(data).map((key) => {
+      const book = data[key][0];
+      return {
+        item_id: key,
+        ...book,
+      };
+    });
+    dispatch({
+      type: SHOW_BOOK,
+      payload: books,
+    });
+    return books;
+  },
+);
+
+export const addBook = (book) => async (dispatch) => {
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(book),
+    });
+    dispatch({
+      type: ADD,
+    });
+    dispatch(showBook());
+  } catch (error) {
+    console.log('Error ', error);
+  }
+};
+
+export const removeBook = (id) => (dispatch) => {
+  fetch(`${url}${id}`, {
+    method: 'DELETE',
+  })
+    .then(() => dispatch({
+      type: REMOVE,
+      payload: id,
+    }));
+};
+
+const bookReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_BOOK:
-      return [
+    case ADD:
+      return {
         ...state,
-        action.payload,
-      ];
-    case REMOVE_BOOK:
-      return state.filter((book) => book.id !== action.id);
+      };
+    case SHOW_BOOK:
+      return {
+        ...state,
+        bookArray: action.payload,
+      };
+    case REMOVE:
+      return {
+        bookArray: state.bookArray.filter(
+          (book) => book.item_id !== action.payload,
+        ),
+      };
     default:
       return state;
   }
 };
 
-export const addBook = (payload) => ({
-  type: ADD_BOOK,
-  payload,
-});
-
-export const removeBook = (id) => ({
-  type: REMOVE_BOOK,
-  id,
-});
-
-export default booksReducer;
+export default bookReducer;
