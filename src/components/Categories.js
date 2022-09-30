@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkStatus } from '../redux/categories/categories';
+import { checkBook } from '../redux/categories/categories';
 
 const Categories = () => {
   const dispatch = useDispatch();
 
-  const handleChangeStatus = () => dispatch(checkStatus());
+  const handleChangeStatus = () => dispatch(checkBook());
   const status = useSelector((state) => state.categoriesReducer);
 
   return (
