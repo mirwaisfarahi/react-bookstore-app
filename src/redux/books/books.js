@@ -42,7 +42,7 @@ export const addBook = (book) => async (dispatch) => {
     });
     dispatch(showBook());
   } catch (error) {
-    console.log('Error ', error);
+    console.log('error', error);
   }
 };
 
@@ -53,7 +53,10 @@ export const removeBook = (id) => (dispatch) => {
     .then(() => dispatch({
       type: REMOVE,
       payload: id,
-    }));
+    }))
+    .then((data) => {
+      console.log('removedata', data);
+    });
 };
 
 const bookReducer = (state = initialState, action) => {
