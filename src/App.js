@@ -1,30 +1,24 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from 'react-router-dom';
-import './App.css';
-import Booklist from './components/BookList';
-import Categories from './components/Categories';
-import Navigation from './components/Navigation';
+import { Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import Navbar from './components/Navbar';
+import Books from './pages/Books';
+import Categories from './pages/Categories';
+import store from './redux/configureStore';
+import './assets/Styles/App.css';
 
-function App() {
-  const counter = useSelector((state) => state.counter);
-
-  return (
-    <div className="App">
-      <h1>{counter}</h1>
-      <Router>
-        <Navigation />
+const App = () => (
+  <>
+    <div className="main">
+      <Navbar />
+      <Provider store={store}>
         <Routes>
-          <Route exact path="/" element={<Booklist />} />
-          <Route exact path="/Categories" element={<Categories />} />
+          <Route path="/" element={<Books />} />
+          <Route path="/categories" element={<Categories />} />
         </Routes>
-      </Router>
+      </Provider>
     </div>
-  );
-}
+  </>
+);
 
 export default App;
